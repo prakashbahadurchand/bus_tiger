@@ -359,9 +359,6 @@
 
                 const response = await fetch("https://script.google.com/macros/s/AKfycbxjfFdwNy-iXzWf1T6qpVTYamd5feFt_1OpWbeDfQ_FbCaoN8aFrh1MO0siU_riRxKDWw/exec?api=createData&tableName=buses_table", {
                     method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
                     body: JSON.stringify(requestBody)
                 });
 
