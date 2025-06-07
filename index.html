@@ -143,6 +143,18 @@
             margin-bottom: 1rem;
             opacity: 0.5;
         }
+
+        .table-loading {
+            text-align: center;
+            padding: 2rem;
+            color: #6c757d;
+        }
+
+        .table-loading i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #0d6efd;
+        }
     </style>
 </head>
 
@@ -192,6 +204,7 @@
                     <table class="table table-striped table-hover mb-0" id="busTable">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Bus ID</th>
                                 <th>Bus Number</th>
                                 <th>Operator</th>
@@ -207,6 +220,12 @@
                             <!-- Data will be loaded here -->
                         </tbody>
                     </table>
+                </div>
+
+                <div id="tableLoading" class="table-loading" style="display: none;">
+                    <i class="bi bi-arrow-clockwise spinner-border"></i>
+                    <h5>Loading Bus Data...</h5>
+                    <p>Please wait while we fetch the latest bus information.</p>
                 </div>
 
                 <div id="emptyState" class="empty-state" style="display: none;">
@@ -240,28 +259,38 @@
                     </h4>
                     <div class="row g-3">
                         <div class="col-md-4">
+                            <label class="form-label">ID</label>
+                            <input type="text" name="id" class="form-control" required placeholder="e.g., 1">
+                        </div>
+                        <div class="col-md-4">
                             <label class="form-label">Bus ID</label>
-                            <input type="text" name="busId" class="form-control" required>
+                            <input type="text" name="busId" class="form-control" required
+                                placeholder="e.g., KSRTC001, TNSTC045">
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Bus Number</label>
-                            <input type="text" name="busNumber" class="form-control" required>
+                            <input type="text" name="busNumber" class="form-control" required
+                                placeholder="e.g., KL-07-AB-1234, TN-09-BC-5678">
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label class="form-label">Operator</label>
-                            <input type="text" name="travelsOperator" class="form-control" required>
+                            <input type="text" name="travelsOperator" class="form-control" required
+                                placeholder="e.g., KSRTC, Redbus, SRS Travels">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Bus Model</label>
-                            <input type="text" name="busModel" class="form-control">
+                            <input type="text" name="busModel" class="form-control"
+                                placeholder="e.g., Volvo B9R, Ashok Leyland, Tata">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Bus Type</label>
-                            <input type="text" name="busType" class="form-control">
+                            <input type="text" name="busType" class="form-control"
+                                placeholder="e.g., AC Sleeper, Non-AC Seater, Volvo Multi-Axle">
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Seat Capacity</label>
-                            <input type="number" name="seatCapacity" class="form-control" required>
+                            <input type="number" name="seatCapacity" class="form-control" required
+                                placeholder="e.g., 40, 52, 35">
                         </div>
                     </div>
                 </div>
@@ -274,15 +303,18 @@
                     <div class="row g-3">
                         <div class="col-md-4">
                             <label class="form-label">From Station</label>
-                            <input type="text" name="fromStation" class="form-control" required>
+                            <input type="text" name="fromStation" class="form-control" required
+                                placeholder="e.g., Bangalore, Chennai, Mumbai">
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">To Station</label>
-                            <input type="text" name="toStation" class="form-control" required>
+                            <input type="text" name="toStation" class="form-control" required
+                                placeholder="e.g., Hyderabad, Kochi, Delhi">
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Stops (comma-separated)</label>
-                            <input type="text" name="stops" class="form-control">
+                            <input type="text" name="stops" class="form-control"
+                                placeholder="e.g., Hosur, Salem, Coimbatore">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Departure Time</label>
@@ -294,12 +326,13 @@
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Total Journey Time (e.g., 8h 30m)</label>
-                            <input type="text" name="totalJourneyTime" class="form-control">
+                            <input type="text" name="totalJourneyTime" class="form-control"
+                                placeholder="e.g., 6h 45m, 12h 30m">
                         </div>
                         <div class="col-md-8">
                             <label class="form-label">Journey Dates (comma-separated)</label>
                             <input type="text" name="journeyDates" class="form-control"
-                                placeholder="2025-06-10,2025-06-11">
+                                placeholder="e.g., 2025-01-20,2025-01-21,2025-01-22">
                         </div>
                     </div>
                 </div>
@@ -311,16 +344,18 @@
                     </h4>
                     <div class="row g-3">
                         <div class="col-md-4">
-                            <label class="form-label">Price</label>
-                            <input type="number" name="price" class="form-control" required>
+                            <label class="form-label">Price (₹)</label>
+                            <input type="number" name="price" class="form-control" required
+                                placeholder="e.g., 800, 1200, 500">
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Discount (%)</label>
-                            <input type="number" name="discount" class="form-control">
+                            <input type="number" name="discount" class="form-control" placeholder="e.g., 10, 15, 20">
                         </div>
                         <div class="col-md-4">
-                            <label class="form-label">Price After Discount</label>
-                            <input type="number" name="priceAfterDiscount" class="form-control">
+                            <label class="form-label">Price After Discount (₹)</label>
+                            <input type="number" name="priceAfterDiscount" class="form-control"
+                                placeholder="e.g., 720, 1020, 400">
                         </div>
                     </div>
                 </div>
@@ -333,11 +368,13 @@
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label class="form-label">WhatsApp Booking Number</label>
-                            <input type="text" name="whatsappBookingNumber" class="form-control">
+                            <input type="text" name="whatsappBookingNumber" class="form-control"
+                                placeholder="e.g., +91 9876543210, +91 8765432109">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Book on Call Number</label>
-                            <input type="text" name="bookOnCallNumber" class="form-control">
+                            <input type="text" name="bookOnCallNumber" class="form-control"
+                                placeholder="e.g., +91 9876543211, 080-12345678">
                         </div>
                     </div>
                 </div>
@@ -374,6 +411,7 @@
         const formSectionContainer = document.getElementById('formSectionContainer');
         const busTableBody = document.getElementById('busTableBody');
         const emptyState = document.getElementById('emptyState');
+        const tableLoading = document.getElementById('tableLoading');
         const progressBar = document.querySelector('.progress-bar');
 
         // Show/Hide sections
@@ -431,15 +469,16 @@
         // Sample data
         fillSampleBtn.addEventListener('click', () => {
             const sampleData = {
-                busId: 'BUS001',
+                id: '1',
+                busId: 'KL-KSRTC-001',
                 busNumber: 'KL-07-AB-1234',
                 travelsOperator: 'Kerala State Road Transport Corporation',
-                busModel: 'Volvo B9R',
-                busType: 'AC Sleeper',
+                busModel: 'Volvo B9R Multi-Axle',
+                busType: 'AC Sleeper (2+1)',
                 seatCapacity: '40',
-                fromStation: 'Thiruvananthapuram',
-                toStation: 'Kochi',
-                stops: 'Kollam, Alappuzha, Ernakulam',
+                fromStation: 'Thiruvananthapuram Central',
+                toStation: 'Kochi Ernakulam',
+                stops: 'Kollam, Alappuzha, Ernakulam Junction',
                 departureTime: '2025-01-20T22:00',
                 arrivalTime: '2025-01-21T06:00',
                 totalJourneyTime: '8h 00m',
@@ -465,7 +504,10 @@
         // Load bus data
         async function loadBusData() {
             try {
-                showToast('Loading bus data...', 'info');
+                // Show table loading indicator
+                busTableBody.innerHTML = '';
+                emptyState.style.display = 'none';
+                tableLoading.style.display = 'block';
 
                 const response = await fetch("https://script.google.com/macros/s/AKfycbxjfFdwNy-iXzWf1T6qpVTYamd5feFt_1OpWbeDfQ_FbCaoN8aFrh1MO0siU_riRxKDWw/exec?api=getData&tableName=buses_table");
 
@@ -484,12 +526,15 @@
                 console.error('Error loading data:', error);
                 showToast('Failed to load bus data: ' + error.message, 'danger');
                 busTableBody.innerHTML = '';
+                tableLoading.style.display = 'none';
                 emptyState.style.display = 'block';
             }
         }
 
         // Display bus data in table
         function displayBusData(data) {
+            // Hide loading indicator
+            tableLoading.style.display = 'none';
             busTableBody.innerHTML = '';
 
             if (!data || data.length === 0) {
@@ -502,6 +547,7 @@
             data.forEach(bus => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
+                    <td>${bus.id || '-'}</td>
                     <td>${bus.busId || '-'}</td>
                     <td>${bus.busNumber || '-'}</td>
                     <td>${bus.travelsOperator || '-'}</td>
@@ -558,6 +604,13 @@
                     showToast("Bus entry created successfully! 🎉", "success");
                     form.reset();
                     updateProgress();
+
+                    // Go back to table and refresh
+                    setTimeout(() => {
+                        formSectionContainer.style.display = 'none';
+                        dataTableSection.style.display = 'block';
+                        loadBusData();
+                    }, 1500);
                 } else {
                     throw new Error(result.message || "Failed to create bus entry");
                 }
